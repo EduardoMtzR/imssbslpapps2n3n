@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>IMSS Bienestar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --primary-color: #006341;   /* Verde IMSS */
+            --secondary-color: #0f766e;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #dcfce7, #f0fdf4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 2.5rem 3rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            text-align: center;
+            max-width: fit-content;
+            width: 100%;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Logo IMSS */
+        .logo {
+            max-width: 300px;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.9rem;
+        }
+
+        p {
+            color: #4b5563;
+            margin-bottom: 2rem;
+        }
+
+        .btn-acceso {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #ffffff;
+            margin: 0.5rem 0.4rem;
+            padding: 1rem 2.4rem;
+            border-radius: 999px;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(0, 99, 65, 0.35);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            animation: pulse 2.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 99, 65, 0.5); }
+            70% { box-shadow: 0 0 0 18px rgba(0, 99, 65, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 99, 65, 0); }
+        }
+
+        .btn-acceso:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 16px 30px rgba(0, 99, 65, 0.45);
+        }
+
+        .btn-acceso:active {
+            transform: scale(0.97);
+        }
+
+        .footer {
+            margin-top: 1.6rem;
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        /* Loader */
+        .loader-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(240, 253, 244, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 9999;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .loader-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #d1fae5;
+            border-top: 6px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Logo IMSS -->
+        <img src="logo-imssb.png" alt="IMSS" class="logo">
+
+        <h1>Coordinación Estatal IMSS Bienestar San Luis Potosí</h1>
+        <p>Acceso a los sistemas institucionales.</p>
+
+        <a
+            href="http://189.157.253.203:8000/Bienestar"
+            rel="noopener noreferrer"
+            class="btn-acceso"
+            onclick="mostrarLoader()"
+        >Ir a Bienestar Resguardos</a>
+        
+        <a
+            href="http://189.157.253.203:8000/Reportes"
+            rel="noopener noreferrer"
+            class="btn-acceso"
+            onclick="mostrarLoader()"
+        >Ir a Carga Información</a>
+        
+        <a
+            href="http://189.157.253.203:8000/Reportes/public"
+            rel="noopener noreferrer"
+            class="btn-acceso"
+            onclick="mostrarLoader()"
+        >Ir a Consulta Información</a>
+
+        <div class="footer">
+            © 2026 · IMSS BIENESTAR
+        </div>
+    </div>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="loader">
+        <div class="spinner"></div>
+        <div class="loader-text">Abriendo sistema…</div>
+    </div>
+
+    <script>
+        function mostrarLoader() {
+            // NO se cancela el evento
+            // NO se usa window.open()
+            document.getElementById('loader').classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
+
