@@ -184,6 +184,10 @@
             // NO se usa window.open()
             document.getElementById('loader').classList.add('active');
         }
+		
+		window.addEventListener('pageshow', function () {
+            document.getElementById('loader').classList.remove('active');
+        });
     </script>
 
 </body>
